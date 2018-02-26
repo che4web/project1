@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{%block content%}
+<h1>hello</h1>
+<div class='row'>
+<div class='col-md-2'>
+sidebar
+</div>
+<div class='col-md-10 data'>
+{% for art in art_list%}
+
+<div class="card w-75">
+  <div class="card-body">
+    <h5 class="card-title">{{art.title}}</h5>
+    <p class="card-text">{{art.get_abstract}}</p>
+    <a href="{{art.get_absolute_url}}" class="btn btn-primary">Читать</a>
+  </div>
+</div>
+
+
+{%endfor%}
+</div>
+
+{%endblock%}

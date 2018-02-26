@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title> my site</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <div>тут будет шапка</div>
+        {% block content%}
+        {%endblock%}
+
+        {% block footer%}
+        <div class='data'></div>
+        <div>тут будет подва</div>
+        {%endblock%}
+        <button onclick="getData()"> получить данные</button>
+        <button class="btn btn-primary " onclick="postData()"> отправить данные</button>
+        <input id='comment'>
+    </body>
+    {%csrf_token%}
+    <script>
+var getData = function(){$.ajax({    url:'/json',
+            success: function(data){
+                alert(data);
+                data.forEach(function (item, i, arr){
+                    $('.data').append('<div class="card "> id = ' +item.id+', title = '+ item.title+'</div>')
+                });
+            }
+            })}
+           
+var postData = function(){$.ajax({    
+                url:'/json',
+                data: {'text':$('#comment').val(),
+                    'foo':'bar',
+                    'csrfmiddlewaretoken': '{{csrf_token}}'
+                },
+                method: 'POST',
+                success: function(data){
+                    alert(data);
+            }
+        
+        
+});}
+    </script>
+
+</html>

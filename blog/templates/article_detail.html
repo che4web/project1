@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+{%block content%}
+<h1> {{object.title}}</h1>
+{{object.text}}
+{%endblock%}
+{%block footer%}
+<h1>Коментарии</h1>
+{% for com in comment_list%}
+<div>
+вы писали: {{com.text}}
+{%if com.image%}
+    <img src="{{com.image.url}}">
+{%endif%}
+</div>
+{%endfor%}
+
+<form method="POST" enctype="multipart/form-data" >
+{%csrf_token%}
+{{form.as_p}}
+<input type="submit" value='ok'>
+</form>
+{%endblock%}
+
+
+
